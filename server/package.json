@@ -1,0 +1,21 @@
+{
+  "name": "echomail-server",
+  "private": true,
+  "version": "1.0.0",
+  "description": "A secure, private email service for creating free temporary and disposable addresses.",
+  "homepage": "https://github.com/brianwalczak/echoMail#readme",
+  "bugs": {
+    "url": "https://github.com/brianwalczak/echoMail/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/brianwalczak/echoMail.git"
+  },
+  "license": "Apache-2.0",
+  "author": "Brian Walczak",
+  "type": "commonjs",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  }
+}
