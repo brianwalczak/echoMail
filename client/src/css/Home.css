@@ -50,3 +50,7 @@
   opacity: 1;
   animation: pulseGlow 3s ease-in-out 1s infinite;
 }
+
+.glow-red::after {
+  background: rgba(220, 38, 38, 0.35);
+}

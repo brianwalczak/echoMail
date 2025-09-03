@@ -7,6 +7,7 @@ import Footer from "./components/Footer";
 import Home from "./pages/Home";
 import API from "./pages/API";
 import Mail from "./pages/Mail";
+import NotFound from "./pages/NotFound";
 import "./index.css";
 
 export default function App() {
@@ -49,6 +50,8 @@ export default function App() {
                 <Route path="/" element={<Home />} />
                 <Route path="/api" element={<API />} />
                 <Route path="/mail" element={<Mail />} />
+
+                <Route path="*" element={<NotFound />} />
             </Routes>
 
             <Footer />
