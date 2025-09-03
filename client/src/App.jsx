@@ -1,5 +1,6 @@
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, useLocation } from "react-router-dom";
 import { useEffect, useRef } from "react";
+import ScrollToTop from "./components/ScrollToTop";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
 import Home from "./pages/Home";
@@ -10,6 +11,7 @@ import "./index.css";
 export default function App() {
     const navbar = useRef();
     const cursor = useRef();
+    const location = useLocation();
     
     useEffect(() => {
         const handleScroll = () => {
@@ -50,9 +52,20 @@ export default function App() {
         };
     }, []);
 
+    useEffect(() => {
+        if (location.hash) {
+            const id = location.hash.replace('#', '');
+            const el = document.getElementById(id);
+            if (el) {
+                el.scrollIntoView({ behavior: "smooth" });
+            }
+        }
+    }, [location]);
+
     return (
         <>
             <div ref={cursor} className="w-6 h-6 bg-blue-500/50 rounded-full fixed top-0 left-0 pointer-events-none z-10000"></div>
+            <ScrollToTop />
             <Header ref={navbar} />
 
             <Routes>

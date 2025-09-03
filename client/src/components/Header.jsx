@@ -6,10 +6,10 @@ const Header = React.forwardRef((props, ref) => (
         <div className="max-w-7xl mx-auto px-4 py-4 flex items-center justify-between">
             <Link to="/" className="text-2xl font-bold text-blue-600">echo<span className="text-white/90">Mail</span></Link>
             <nav className="space-x-10 hidden md:flex">
-                <a href="#how-it-works" className="text-gray-300 font-bold font-medium rounded-md px-3 py-1.5 border border-transparent hover:border-gray-400/30 hover:bg-white/20 hover:text-white transition">How it Works</a>
+                <Link to="/#how-it-works" className="text-gray-300 font-bold font-medium rounded-md px-3 py-1.5 border border-transparent hover:border-gray-400/30 hover:bg-white/20 hover:text-white transition">How it Works</Link>
                 <Link to="/api" className="text-gray-300 font-bold font-medium rounded-md px-3 py-1.5 border border-transparent hover:border-gray-400/30 hover:bg-white/20 hover:text-white transition">API</Link>
-                <a href="#features" className="text-gray-300 font-bold font-medium rounded-md px-3 py-1.5 border border-transparent hover:border-gray-400/30 hover:bg-white/20 hover:text-white transition">Features</a>
-                <a href="#faq" className="text-gray-300 font-bold font-medium rounded-md px-3 py-1.5 border border-transparent hover:border-gray-400/30 hover:bg-white/20 hover:text-white transition">FAQ</a>
+                <Link to="/#features" className="text-gray-300 font-bold font-medium rounded-md px-3 py-1.5 border border-transparent hover:border-gray-400/30 hover:bg-white/20 hover:text-white transition">Features</Link>
+                <Link to="/#faq" className="text-gray-300 font-bold font-medium rounded-md px-3 py-1.5 border border-transparent hover:border-gray-400/30 hover:bg-white/20 hover:text-white transition">FAQ</Link>
             </nav>
 
             <Link to="/mail" className="md:inline-block bg-blue-700 text-white font-semibold py-2 px-4 rounded-lg shadow hover:bg-blue-800 transition">Get Started</Link>
