@@ -1,6 +1,7 @@
 import { Routes, Route, useLocation } from "react-router-dom";
 import { useEffect, useRef } from "react";
 import ScrollToTop from "./components/ScrollToTop";
+import CustomCursor from "./components/CustomCursor";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
 import Home from "./pages/Home";
@@ -10,7 +11,6 @@ import "./index.css";
 
 export default function App() {
     const navbar = useRef();
-    const cursor = useRef();
     const location = useLocation();
     
     useEffect(() => {
@@ -24,31 +24,8 @@ export default function App() {
         
         window.addEventListener("scroll", handleScroll);
 
-        // Custom cursor
-        let mouseX = 0, mouseY = 0;
-        let currentX = 0, currentY = 0;
-        const speed = 0.2;
-
-        const handleMouseMove = (e) => {
-            mouseX = e.clientX;
-            mouseY = e.clientY;
-        };
-
-        const animateCursor = () => {
-            currentX += (mouseX - currentX) * speed;
-            currentY += (mouseY - currentY) * speed;
-            if (cursor.current) {
-                cursor.current.style.transform = `translate3d(${currentX - 12}px, ${currentY - 12}px, 0)`;
-            }
-            requestAnimationFrame(animateCursor);
-        };
-
-        document.addEventListener("mousemove", handleMouseMove);
-        animateCursor();
-
         return () => {
             window.removeEventListener("scroll", handleScroll);
-            document.removeEventListener("mousemove", handleMouseMove);
         };
     }, []);
 
@@ -64,7 +41,7 @@ export default function App() {
 
     return (
         <>
-            <div ref={cursor} className="w-6 h-6 bg-blue-500/50 rounded-full fixed top-0 left-0 pointer-events-none z-10000"></div>
+            <CustomCursor />
             <ScrollToTop />
             <Header ref={navbar} />
 
