@@ -33,7 +33,7 @@ export default function Home() {
 
     return (
         <>
-            <main className="flex items-center justify-start flex-col text-center px-4 min-h-screen glow pt-70 border-b border-gray-400/30">
+            <main className="flex items-center justify-start flex-col text-center px-4 min-h-screen glow glow-blue pt-70 border-b border-gray-400/30">
                 <div className="animated animatedFadeInUp fadeInUp">
                     <h1 className="text-5xl md:text-6xl font-bold mb-6 text-white">Private mail for <span className="text-blue-500">everyone</span>.</h1>
                     <p className="text-lg md:text-xl text-gray-300 mb-8">Create disposable, secure emails in seconds. No signup required.</p>

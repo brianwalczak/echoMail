@@ -49,7 +49,6 @@
   transform: translateX(-50%);
   width: 100%;
   height: 400px;
-  background: rgba(37, 99, 235, 0.35);
   filter: blur(100px);
   z-index: -10;
 
@@ -57,6 +56,10 @@
   animation: pulseGlow 3s ease-in-out 1s infinite;
 }
 
-.glow-red::after {
+.glow.glow-blue::after {
+  background: rgba(37, 99, 235, 0.35);
+}
+
+.glow.glow-red::after {
   background: rgba(220, 38, 38, 0.35);
 }
