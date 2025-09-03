@@ -44,7 +44,7 @@ export default function Home() {
                 </div>
             </main>
             
-            <div id="features" className="flex flex-col items-center justify-center py-24 bg-gray-900 border-b border-gray-400/30">
+            <div id="features" className="flex flex-col items-center justify-center py-24 bg-gray-900 border-b border-gray-400/30 scroll-mt-[90px]">
                 <h1 className="text-5xl font-bold text-white mb-12">Features</h1>
                 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-7xl w-full px-4 md:px-8">
@@ -96,7 +96,7 @@ export default function Home() {
                 </div>
             </div>
 
-            <div id="how-it-works" className="flex flex-col items-center justify-center py-24 bg-gray-800 border-b border-gray-400/30">
+            <div id="how-it-works" className="flex flex-col items-center justify-center py-24 bg-gray-800 border-b border-gray-400/30 scroll-mt-[50px]">
                 <h1 className="text-5xl font-bold text-white mb-16">How It Works</h1>
 
                 <div className="relative flex flex-col items-center w-full max-w-3xl px-4 md:px-8">
