@@ -33,12 +33,11 @@ Before you continue, make sure that Node.js is properly installed (run `node --v
 
 Next, install the required dependencies and start the server (port 3000):
 ```bash
-cd server
 npm install
 node .
 ```
 
-The React + Vite frontend is located in the client folder. To run it:
+The React + Vite frontend is located in the client folder. To launch a live development server:
 ```bash
 cd client
 npm install
