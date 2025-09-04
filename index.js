@@ -29,7 +29,17 @@ app.use(express.json());
 app.use(limiter);
 
 async function getMessages(parsed) {
-  console.log(parsed); // not done yet!
+  const email = parsed.to?.text.split('@')[0].toLowerCase();
+  const session = await getSession(email, false);
+  if(!session) return;
+
+  return await addMessage(session.id, {
+    from: parsed.from?.text || 'Unknown',
+    subject: parsed?.subject || '(No Subject)',
+    text: parsed?.text || '(No Content)',
+    html: parsed?.html || null,
+    receivedAt: parsed?.date ? DateTime.fromJSDate(parsed.date).toUTC().toJSDate() : DateTime.utc().toJSDate()
+  });
 }
 
 app.post('/api/session', async (req, res) => {
