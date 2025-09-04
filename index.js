@@ -28,6 +28,11 @@ app.set('trust proxy', Number(process.env.PROXY_TRUST) ?? false);
 app.use(express.json());
 app.use(limiter);
 
+if(process.env.VERIFY_DKIM?.toString() === 'false') {
+  console.log(chalk.blue('[SMTP]'), chalk.yellow('DKIM verification is disabled. This is not recommended for production.'));
+  mail.verifyDKIM(false);
+}
+
 async function getMessages(parsed) {
   const email = parsed.to?.text.split('@')[0].toLowerCase();
   const session = await getSession(email, false);
