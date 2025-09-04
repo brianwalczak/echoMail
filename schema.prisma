@@ -1,0 +1,26 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model Session {
+  id          String @id
+  createdAt   DateTime
+  expiresAt   DateTime
+  messages    Message[]
+}
+
+model Message {
+  id         Int      @id @default(autoincrement())
+  session    Session  @relation(fields: [sessionId], references: [id])
+  sessionId  String
+  from       String
+  subject    String
+  body       String
+  html       String?
+  receivedAt DateTime
+}
