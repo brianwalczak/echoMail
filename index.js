@@ -35,13 +35,14 @@ if(process.env.VERIFY_DKIM?.toString() === 'false') {
 
 async function getMessages(parsed) {
   const email = parsed.to?.text.split('@')[0].toLowerCase();
+  const domain = parsed.to?.text.split('@')[1].toLowerCase();
   const session = await getSession(email, false);
-  if(!session) return;
+  if(!session || (process.env?.DOMAIN_CHECK && process.env.DOMAIN_CHECK?.toLowerCase() !== domain)) return;
 
   return await addMessage(session.id, {
     from: parsed.from?.text || 'Unknown',
     subject: parsed?.subject || '(No Subject)',
-    text: parsed?.text || '(No Content)',
+    body: parsed?.text || '(No Content)',
     html: parsed?.html || null,
     receivedAt: parsed?.date ? DateTime.fromJSDate(parsed.date).toUTC().toJSDate() : DateTime.utc().toJSDate()
   });
