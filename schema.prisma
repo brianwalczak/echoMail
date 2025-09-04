@@ -9,6 +9,7 @@ datasource db {
 
 model Session {
   id          String @id
+  token       String
   createdAt   DateTime
   expiresAt   DateTime
   messages    Message[]

@@ -3,6 +3,8 @@ const { rateLimit } = require('express-rate-limit');
 const SimpleMail = require('simple-mail-smtp');
 const { DateTime } = require('luxon');
 const express = require('express');
+const bcrypt = require('bcryptjs');
+const crypto = require('crypto');
 const chalk = require('chalk');
 const fs = require('fs');
 const path = require('path');
@@ -59,12 +61,17 @@ app.post('/api/session', async (req, res) => {
     switch (method) {
       case 'get': {
         if(!req.body?.id) return res.status(400).json({ success: false, reason: 'Your request has been malformed. Please try again.' });
+        if(!req.body?.token) return res.status(401).json({ success: false, reason: 'An invalid session token was provided. Please try again.' });
 
         try {
           const session = await getSession(req.body.id, true);
-
           if(!session) return res.status(404).json({ success: false, reason: 'Session not found.' });
-          return res.status(200).json({ success: true, data: session });
+          
+          const valid = await bcrypt.compare(req.body.token, session.token);
+          if(!valid) return res.status(401).json({ success: false, reason: 'An invalid session token was provided. Please try again.' });
+
+          const { token: _, ...omitSession } = session;
+          return res.status(200).json({ success: true, data: omitSession });
         } catch (error) {
           console.error(chalk.red('[SERVER]'), 'Failed to retrieve a session:', error);
 
@@ -75,10 +82,13 @@ app.post('/api/session', async (req, res) => {
         const expiresAt = DateTime.utc().plus({ hours: 24 }).toJSDate(); // Sessions expire in 24 hours
 
         try {
-          const session = await createSession({ id: crypto.randomUUID(), createdAt: DateTime.utc().toJSDate(), expiresAt });
+          const token = crypto.randomBytes(60).toString('base64url');
+          const session = await createSession({ id: crypto.randomUUID(), token: (await bcrypt.hash(token, 10)), createdAt: DateTime.utc().toJSDate(), expiresAt });
 
           if(!session) return res.status(500).json({ success: false, reason: 'Failed to create a new session. Please try again later.' });
-          return res.status(201).json({ success: true, data: session });
+
+          const { token: _, ...omitSession } = session;
+          return res.status(201).json({ success: true, token: token, data: omitSession });
         } catch (error) {
           console.error(chalk.red('[SERVER]'), 'Failed to create a new session:', error);
 
@@ -87,12 +97,18 @@ app.post('/api/session', async (req, res) => {
       }
       case 'revoke': {
         if(!req.body?.id) return res.status(400).json({ success: false, reason: 'Your request has been malformed. Please try again.' });
+        if(!req.body?.token) return res.status(401).json({ success: false, reason: 'An invalid session token was provided. Please try again.' });
 
         try {
-          const session = await revokeSession(req.body.id);
-
+          const session = await getSession(req.body.id, true);
           if(!session) return res.status(404).json({ success: false, reason: 'Session not found or has already been revoked.' });
-          return res.status(200).json({ success: true, data: session });
+          
+          const valid = await bcrypt.compare(req.body.token, session.token);
+          if(!valid) return res.status(401).json({ success: false, reason: 'An invalid session token was provided. Please try again.' });
+
+          const revoked = await revokeSession(req.body.id);
+          const { token: _, ...omitSession } = revoked;
+          return res.status(200).json({ success: true, data: omitSession });
         } catch (error) {
           console.error(chalk.red('[SERVER]'), 'Failed to revoke an existing session:', error);
 
