@@ -35,6 +35,12 @@ async function createSession(data) {
 
 async function revokeSession(id) {
     try {
+        // Delete all messages for the session
+        await prisma.message.deleteMany({
+            where: { sessionId: id }
+        });
+
+        // Delete the session itself
         const data = await prisma.session.delete({
             where: { id }
         });
