@@ -134,8 +134,11 @@ app.listen(PORT, () => {
     console.log(`${chalk.blue('[SMTP]')} Catch-all mail server is running on port 25.`);
   });
 
-  if (fs.existsSync(static)) {
-    app.use(express.static(static));
+  if (fs.existsSync(static) && fs.existsSync(path.join(static, "index.html"))) {
+    app.use(express.static(static)); // First serve static files
+    app.get('/{*any}', (req, res) => { // Then serve any other paths left
+      res.sendFile(path.join(static, "index.html"));
+    });
 
     console.log(`${chalk.green('[SERVER]')} Static files are being served from ${static}.`);
   } else {
