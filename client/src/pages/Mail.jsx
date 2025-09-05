@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 
-export default function API() {
+export default function Mail() {
     return (
         <main className="flex items-center justify-start flex-col text-center px-4 min-h-screen pt-70 border-b border-gray-400/30">
             <div className="animated animatedFadeInUp fadeInUp">
