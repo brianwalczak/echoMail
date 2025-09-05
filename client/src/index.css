@@ -63,3 +63,15 @@
 .glow.glow-red::after {
   background: rgba(220, 38, 38, 0.35);
 }
+
+/* -- Components -- */
+.toast, .dialog {
+  opacity: 0;
+  transition: opacity 0.3s;
+  pointer-events: none;
+}
+
+.toast.visible, .dialog.visible {
+  opacity: 1;
+  pointer-events: auto;
+}
