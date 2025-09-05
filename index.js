@@ -21,7 +21,7 @@ require('dotenv').config({ quiet: true });
 const static = path.join(__dirname, 'client', 'dist');
 const limiter = rateLimit({
   windowMs: 15 * 60 * 1000, // 15 minutes
-  max: 100, // 100 requests limit
+  max: 300, // 300 requests limit
   message: {
     error: 'Too many requests, please try again later.'
   }
