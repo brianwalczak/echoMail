@@ -5,6 +5,7 @@ const { DateTime } = require('luxon');
 const express = require('express');
 const bcrypt = require('bcryptjs');
 const crypto = require('crypto');
+const cors = require('cors');
 const chalk = require('chalk');
 const fs = require('fs');
 const path = require('path');
@@ -14,6 +15,7 @@ const PORT = 3000;
 const mail = new SimpleMail();
 mail.catch(getMessages);
 
+app.use('/api', cors());
 require('dotenv').config({ quiet: true });
 
 const static = path.join(__dirname, 'client', 'dist');
