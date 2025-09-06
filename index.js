@@ -52,6 +52,15 @@ async function getMessages(parsed) {
   });
 }
 
+function randomString(length = 7) {
+  const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz';
+  let result = '';
+  for (let i = 0; i < length; i++) {
+    result += chars.charAt(Math.floor(Math.random() * chars.length));
+  }
+  return result;
+}
+
 app.post('/api/session', async (req, res) => {
   try {
     const { method } = req.body;
@@ -85,7 +94,7 @@ app.post('/api/session', async (req, res) => {
 
         try {
           const token = crypto.randomBytes(60).toString('base64url');
-          const session = await createSession({ id: crypto.randomUUID(), token: (await bcrypt.hash(token, 10)), createdAt: DateTime.utc().toJSDate(), expiresAt });
+          const session = await createSession({ id: randomString().toLowerCase(), token: (await bcrypt.hash(token, 10)), createdAt: DateTime.utc().toJSDate(), expiresAt });
 
           if(!session) return res.status(500).json({ success: false, reason: 'Failed to create a new session. Please try again later.' });
 
