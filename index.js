@@ -1,4 +1,4 @@
-const { getSession, createSession, revokeSession, expireSessions, addMessage, deleteMessage } = require('./db.js');
+const { getSession, createSession, revokeSession, expireSessions, addMessage } = require('./db.js');
 const { rateLimit } = require('express-rate-limit');
 const SimpleMail = require('simple-mail-smtp');
 const { DateTime } = require('luxon');
@@ -61,6 +61,14 @@ function randomString(length = 7) {
   return result;
 }
 
+async function createEmail() {
+  const email = randomString().toLowerCase();
+  const exists = await getSession(email, false);
+
+  if (exists) return createEmail();
+  return email;
+}
+
 app.post('/api/session', async (req, res) => {
   try {
     const { method } = req.body;
@@ -94,7 +102,7 @@ app.post('/api/session', async (req, res) => {
 
         try {
           const token = crypto.randomBytes(60).toString('base64url');
-          const session = await createSession({ id: randomString().toLowerCase(), token: (await bcrypt.hash(token, 10)), createdAt: DateTime.utc().toJSDate(), expiresAt });
+          const session = await createSession({ id: (await createEmail()), token: (await bcrypt.hash(token, 10)), createdAt: DateTime.utc().toJSDate(), expiresAt });
 
           if(!session) return res.status(500).json({ success: false, reason: 'Failed to create a new session. Please try again later.' });
 
