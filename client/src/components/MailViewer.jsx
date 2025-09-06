@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { parseDate } from '../utils.jsx';
+import DOMPurify from 'dompurify';
 
 const FADE_DURATION = 300; // ms
 
@@ -46,7 +47,7 @@ const MailViewer = ({ mail, onClose }) => {
             <pre className={`whitespace-pre-wrap text-sm ${mail.html ? 'border-b border-gray-300/50 mb-3 pb-3' : ''}`}>{mail.body}</pre>
           )}
           {mail.html && (
-            <div className="prose prose-sm dark:prose-invert max-w-none" dangerouslySetInnerHTML={{ __html: mail.html }} />
+            <div className="prose prose-sm dark:prose-invert max-w-none" dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(mail.html, { USE_PROFILES: { html: true } }) }} />
           )}
         </div>
       </div>
