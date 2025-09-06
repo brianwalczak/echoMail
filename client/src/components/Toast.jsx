@@ -8,12 +8,18 @@ const Toast = ({ id, type, message, seconds, onClose }) => {
 
     // used to trigger fade in animation
     useEffect(() => {
-        setVisible(true);
+        const id = requestAnimationFrame(() => setVisible(true));
 
-        if (!seconds) return;
-        const timer = setTimeout(() => setStatus(true), (seconds * 1000) + FADE_DURATION);
+        if(seconds) {
+            const timer = setTimeout(() => setStatus(true), (seconds * 1000) + FADE_DURATION);
+            
+            return () => {
+                clearTimeout(timer);
+                cancelAnimationFrame(id);
+            };
+        }
 
-        return () => clearTimeout(timer);
+        return () => cancelAnimationFrame(id);
     }, []); // on mount
 
     // used to trigger fade out animation and call onClose callback

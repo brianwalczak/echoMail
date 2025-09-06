@@ -8,7 +8,8 @@ const Dialog = ({ id, type, title, body, cancel, confirm, onClose }) => {
 
     // used to trigger fade in animation
     useEffect(() => {
-        setVisible(true);
+        const id = requestAnimationFrame(() => setVisible(true));
+        return () => cancelAnimationFrame(id);
     }, []); // on mount
 
     // used to trigger fade out animation and call onClose callback
