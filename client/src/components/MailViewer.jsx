@@ -43,11 +43,10 @@ const MailViewer = ({ mail, onClose }) => {
         </div>
 
         <div className="flex-1 overflow-y-auto px-6 py-4">
-          {mail.body && (
-            <pre className={`whitespace-pre-wrap text-sm ${mail.html ? 'border-b border-gray-300/50 mb-3 pb-3' : ''}`}>{mail.body}</pre>
-          )}
-          {mail.html && (
+          {mail.html ? (
             <div className="prose prose-sm dark:prose-invert max-w-none" dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(mail.html, { USE_PROFILES: { html: true } }) }} />
+          ) : (
+            <pre className={`whitespace-pre-wrap text-sm`}>{mail.body}</pre>
           )}
         </div>
       </div>
