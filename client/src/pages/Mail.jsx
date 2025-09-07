@@ -113,7 +113,16 @@ export default function Mail() {
     };
 
     const loadExisting = () => {
-        return setToast({ id: "err-toast", type: "error", message: "This feature is still under development.", onClose: () => setToast(null), seconds: 3 });
+        if (!existingId || !existingToken) {
+            return setToast({ id: "err-toast", type: "error", message: "Please provide both a session ID and token.", onClose: () => setToast(null), seconds: 3 });
+        }
+
+        setCookie('session_id', existingId);
+        setCookie('session_token', existingToken);
+
+        setExistingId('');
+        setExistingToken('');
+        return fetchInbox({ loading: true, toast: true });
     };
 
     // setup automatic inbox refresh every 10 seconds
