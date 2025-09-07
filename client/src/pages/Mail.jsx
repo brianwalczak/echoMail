@@ -12,6 +12,11 @@ export default function Mail() {
     const [toast, setToast] = useState(null);
     const [dialog, setDialog] = useState(null);
 
+    const [tab, setTab] = useState('create');
+    const [duration, setDuration] = useState('24h');
+    const [existingId, setExistingId] = useState('');
+    const [existingToken, setExistingToken] = useState('');
+
     const session = async (body, isLoading, onSuccess, onError) => {
         try {
             if (isLoading) setLoading(isLoading);
@@ -42,7 +47,7 @@ export default function Mail() {
     };
 
     const createInbox = ({ loading = true, toast = false } = {}) => {
-        session({ method: 'create' }, (loading ? "Creating, please wait..." : null), (res) => {
+        session({ method: 'create', duration: (duration || '24h') }, (loading ? "Creating, please wait..." : null), (res) => {
             setCookie('session_id', res.data.id);
             setCookie('session_token', res.token);
             setInbox([]); // start with empty inbox
@@ -107,6 +112,10 @@ export default function Mail() {
         return setActiveMail(mail);
     };
 
+    const loadExisting = () => {
+        return setToast({ id: "err-toast", type: "error", message: "This feature is still under development.", onClose: () => setToast(null), seconds: 3 });
+    };
+
     // setup automatic inbox refresh every 10 seconds
     useEffect(() => {
         const refreshInbox = () => {
@@ -126,15 +135,49 @@ export default function Mail() {
 
     return (
         <main className="flex items-center justify-start flex-col text-center px-4 min-h-screen pt-32 border-b border-gray-400/30">
-            <h1 className="text-5xl md:text-5xl font-bold mb-6 text-white">Your Disposable Inbox</h1>
+            <h1 className="text-5xl md:text-5xl font-bold mb-6 text-white">{inbox ? 'Inbox Dashboard' : 'Create an Inbox'}</h1>
+            <p className="text-lg md:text-xl text-gray-300 mb-8">{inbox ? 'Access your disposable inbox\'s messages below.' : 'Get started by creating a new disposable inbox in seconds.'}</p>
+
             {toast && <Toast {...toast} />}
             {dialog && <Dialog {...dialog} />}
             {activeMail && (<MailViewer mail={activeMail} onClose={() => setActiveMail(null)} />)}
 
             {!inbox ? (
-                <button onClick={() => setDialog({ id: "create", type: "success", title: "Create disposable inbox?", body: "Are you sure you want to create a disposable inbox? This will generate a new temporary email address.", cancel: "Cancel", confirm: "Create", onClose: (status) => { setDialog(null); if (status === true) createInbox({ toast: true }); } })} className="md:inline-block bg-blue-700 text-white font-semibold py-3 px-6 rounded-lg shadow hover:bg-blue-800 transition" disabled={(loading !== false)}>
-                    {(loading !== false) ? loading : "Create Temporary Email"}
-                </button>
+                <div className="w-full max-w-md mx-auto rounded-lg p-8 shadow border border-gray-400/30 bg-white/20 transition">
+                    <div className="flex mb-6">
+                        <button onClick={() => setTab('create')} className={`flex-1 py-2 font-semibold rounded-l-lg text-white ${tab === 'create' ? 'bg-blue-700' : 'bg-white/20'}`}>Create New</button>
+                        <button onClick={() => setTab('existing')} className={`flex-1 py-2 font-semibold rounded-r-lg text-white ${tab === 'existing' ? 'bg-blue-700' : 'bg-white/20'}`}>Use Existing</button>
+                    </div>
+                    {tab === 'create' && (
+                        <form onSubmit={e => { e.preventDefault(); createInbox({ toast: true }); }}>
+                            <label className="block text-left mb-2 text-white font-semibold">Duration</label>
+
+                            <select value={duration} onChange={e => setDuration(e.target.value)} className="w-full mb-4 p-2 rounded bg-gray-800 text-white" required>
+                                <option value="24h">24 Hours</option>
+                                <option value="48h">48 Hours</option>
+                                <option value="3d">3 Days</option>
+                                <option value="7d">7 Days</option>
+                            </select>
+
+                            <button type="submit" className="w-full bg-blue-700 text-white font-semibold py-3 px-6 rounded-lg shadow hover:bg-blue-800 transition" disabled={(loading !== false)}>{(loading !== false) ? loading : "Create Temporary Email"}</button>
+                        </form>
+                    )}
+                    {tab === 'existing' && (
+                        <>
+                            <form onSubmit={e => { e.preventDefault(); loadExisting(); }}>
+                                <label className="block text-left mb-2 text-white font-semibold">Session ID</label>
+                                <input type="text" value={existingId} onChange={e => setExistingId(e.target.value)} className="w-full mb-4 p-2 rounded bg-gray-800 text-white" placeholder="Enter session identifier" required />
+                                
+                                <label className="block text-left mb-2 text-white font-semibold">Session Token</label>
+                                <input type="text" value={existingToken} onChange={e => setExistingToken(e.target.value)} className="w-full mb-4 p-2 rounded bg-gray-800 text-white" placeholder="Enter session token" required />
+                                
+                                <button type="submit" className="w-full bg-blue-700 text-white font-semibold py-3 px-6 rounded-lg shadow hover:bg-blue-800 transition" disabled={(loading !== false)}>{(loading !== false) ? loading : "Use Existing Inbox"}</button>
+                            </form>
+
+                            <p className="text-sm mt-3">Learn more about API usage and sessions <a href="/api" className="underline">here</a>.</p>
+                        </>
+                    )}
+                </div>
             ) : (
                 <>
                     <div className="mb-8">
