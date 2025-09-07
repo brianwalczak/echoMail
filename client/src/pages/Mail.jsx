@@ -7,6 +7,7 @@ import Dialog from '../components/Dialog.jsx';
 export default function Mail() {
     const [loading, setLoading] = useState(false);
     const [inbox, setInbox] = useState(null);
+    const [expiresAt, setExpiresAt] = useState(null);
 
     const [activeMail, setActiveMail] = useState(null);
     const [toast, setToast] = useState(null);
@@ -51,6 +52,7 @@ export default function Mail() {
             setCookie('session_id', res.data.id);
             setCookie('session_token', res.token);
             setInbox([]); // start with empty inbox
+            setExpiresAt(res.data.expiresAt);
 
             if (toast) setToast({ id: "create-success", type: "success", message: "Your disposable inbox has been created!", onClose: () => setToast(null), seconds: 3 });
         });
@@ -83,6 +85,7 @@ export default function Mail() {
 
         session({ method: 'get', id: sessionId, token: sessionToken }, (loading ? "Updating, please wait..." : null), (res) => {
             setInbox(res.data?.messages || []);
+            setExpiresAt(res.data.expiresAt);
 
             if (toast) setToast({ id: "fetch-success", type: "success", message: "Your inbox has been updated successfully!", onClose: () => setToast(null), seconds: 3 });
         }, (error) => {
@@ -145,7 +148,7 @@ export default function Mail() {
     return (
         <main className="flex items-center justify-start flex-col text-center px-4 min-h-screen pt-32 border-b border-gray-400/30">
             <h1 className="text-5xl md:text-5xl font-bold mb-6 text-white">{inbox ? 'Inbox Dashboard' : 'Create an Inbox'}</h1>
-            <p className="text-lg md:text-xl text-gray-300 mb-8">{inbox ? 'Access your disposable inbox\'s messages below.' : 'Get started by creating a new disposable inbox in seconds.'}</p>
+            <p className={`text-lg md:text-xl text-gray-300 ${inbox ? 'mb-4' : 'mb-8'}`}>{inbox ? 'Access your disposable inbox\'s messages below.' : 'Get started by creating a new disposable inbox in seconds.'}</p>
 
             {toast && <Toast {...toast} />}
             {dialog && <Dialog {...dialog} />}
@@ -194,6 +197,7 @@ export default function Mail() {
                         <button onClick={() => fetchInbox({ toast: true })} className="md:inline-block bg-blue-700 text-white font-semibold py-3 px-6 rounded-lg shadow hover:bg-blue-800 transition" disabled={(loading !== false)}>{(loading !== false) ? loading : "Refresh Inbox"}</button>
                         <button onClick={() => setDialog({ id: "destroy", type: "danger", title: "Destroy disposable inbox?", body: "Are you sure you want to destroy your disposable inbox? All received emails will be permanently deleted and cannot be recovered.", cancel: "Cancel", confirm: "Destroy", onClose: (status) => { setDialog(null); if (status === true) destroyInbox({ toast: true }); } })} className="md:inline-block bg-transparent text-red-500 font-semibold py-3 px-6 rounded-lg shadow border border-red-500 hover:bg-red-700 hover:text-white transition ml-3" disabled={(loading !== false)}>Destroy Inbox</button>
                     </div>
+                    {expiresAt && (<p className="text-sm text-gray-400 mb-4">This inbox will expire on <b>{parseDate(expiresAt)}</b>. You can create a new inbox at any time.</p>)}
 
                     <div className="rounded-md border border-gray-400/30 bg-white/20 transition p-6 w-full max-w-4xl overflow-y-auto">
                         {inbox.length === 0 ? (
