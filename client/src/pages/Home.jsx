@@ -14,12 +14,12 @@ export default function Home() {
             answer: "A disposable email is a temporary email address that you can use to receive messages without revealing your personal email. It's perfect for signing up for services, avoiding spam, or protecting your privacy."
         },
         {
-            question: "Do I need to sign up to use the service?",
+            question: "Do I need to sign up to use echoMail?",
             answer: "No signup is required! You can generate a disposable email instantly and start using it right away."
         },
         {
             question: "How long do disposable emails last?",
-            answer: "Our disposable emails are temporary and browser sessions typically last for 24 hours. You can create a new disposable email at any time."
+            answer: "Our disposable emails are temporary and browser sessions typically last for 24 hours (but can be configured for 48 hours, 3 days, or 7 days). You can create a new disposable email at any time."
         },
         {
             question: "Can I use the API for free?",
