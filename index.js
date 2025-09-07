@@ -99,10 +99,13 @@ app.post('/api/session', async (req, res) => {
       }
       case 'create': {
         let duration = '24h';
-        
         if(req.body?.duration && ['24h', '48h', '3d', '7d'].includes(req.body.duration)) duration = req.body.duration;
-        if(duration.endsWith('h')) duration = parseInt(duration);
-        if(duration.endsWith('d')) duration = (parseInt(duration) * 24);
+        
+        if(duration.endsWith('h')) {
+          duration = parseInt(duration);
+        } else if(duration.endsWith('d')) {
+          duration = (parseInt(duration) * 24);
+        }
 
         const expiresAt = DateTime.utc().plus({ hours: duration }).toJSDate(); // Sessions expire in 24 hours (default), configurable by user
 
