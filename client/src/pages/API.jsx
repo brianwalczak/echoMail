@@ -12,7 +12,8 @@ export default function API() {
                     <pre className="bg-gray-900 p-4 rounded-lg text-sm text-gray-200 overflow-x-auto mb-3">
 {`POST /api/session
 {
-    "method": "create"
+    "method": "create",
+    "duration": "24h" // Optional, valid values: "24h", "48h", "3d", "7d" (default: "24h")
 }`}
                     </pre>
 
