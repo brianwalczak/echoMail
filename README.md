@@ -2,7 +2,7 @@
 <p align="center">A secure, private email service for creating free temporary and disposable addresses - no signup required!</p>
 
 > [!WARNING]
-> **This project is currently in its beta state as I gather user feedback. The backend is still under construction! If you encounter any issues, please report them <a href='https://github.com/BrianWalczak/echoMail/issues'>here</a> :)**
+> **This project is currently in its beta state as I gather user feedback. If you encounter any issues, please report them <a href='https://github.com/BrianWalczak/echoMail/issues'>here</a> :)**
 
 ## Features
 - (📧) Create disposable, secure emails instantly - no signup required.
