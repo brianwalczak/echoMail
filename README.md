@@ -13,15 +13,6 @@
 - (👤) Open-source under Apache 2.0 license - contribute or view it anytime.
 
 ## Getting Started
-To get started with using `echoMail`, you can visit the website here: https://echo.brian.icu/
-
-No account is required to create disposable emails. You can access the API without the use of an API key.
-
-## Self-Hosting
-> [!NOTE]
-> **Self-hosting is optional and intended for developers or advanced users who want more control. Most users won't need to self-host.**
-
-Prefer to host your own `echoMail` instance? `echoMail` is open-source under the Apache 2.0 license, and is easy to set up on your own server.
 
 To start, you can download this repository by using the following:
 ```bash
