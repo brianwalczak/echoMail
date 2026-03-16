@@ -34,7 +34,7 @@ export default function Home() {
     return (
         <>
             <main className="flex items-center justify-start flex-col text-center px-4 min-h-screen glow glow-blue pt-50">
-                <div className="animated animatedFadeInUp fadeInUp">
+                <div className="animated animatedFadeInUp fadeInUp w-full">
                     <h1 className="text-4xl md:text-6xl font-bold mb-6 text-white">Private mail for <span className="text-blue-500">everyone</span>.</h1>
                     <p className="text-lg md:text-xl text-gray-400 mb-8">Create disposable, secure email addresses in seconds. No signup required.</p>
 
@@ -70,7 +70,7 @@ export default function Home() {
                         </div>
                     </div>
 
-                    <div className="flex items-center justify-center gap-8 mt-10 text-sm text-gray-500">
+                    <div className="flex items-center justify-center flex-wrap gap-4 sm:gap-8 mt-10 text-xs sm:text-sm text-gray-500 px-5">
                         <div className="flex items-center gap-1.5">
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-4 text-blue-500">
                                 <path strokeLinecap="round" strokeLinejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
@@ -99,7 +99,7 @@ export default function Home() {
             </main>
 
             <div id="features" className="flex flex-col items-center justify-center pt-38 bg-gray-950 scroll-mt-[90px]">
-                <h1 className="text-5xl font-bold text-white mb-12">Features</h1>
+                <h1 className="text-5xl font-bold text-white mb-12 px-5">Features</h1>
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-7xl w-full px-4 md:px-8">
                     <div className="flex flex-col items-center text-center p-6 bg-white/5 border border-white/10 rounded-2xl">
@@ -151,7 +151,7 @@ export default function Home() {
             </div>
 
             <div id="how-it-works" className="flex flex-col items-center justify-center pt-38 bg-gray-950 scroll-mt-[50px]">
-                <h1 className="text-5xl font-bold text-white mb-16">How It Works</h1>
+                <h1 className="text-5xl font-bold text-white mb-16 px-5">How It Works</h1>
 
                 <div className="relative flex flex-col items-center w-full max-w-3xl px-4 md:px-8">
                     <div className="relative flex flex-col items-center text-center p-8 bg-white/5 border border-white/10 rounded-2xl mb-16 w-full">
@@ -178,7 +178,7 @@ export default function Home() {
             </div>
 
             <div id="faq" className="flex flex-col items-center justify-center py-38 bg-gray-950">
-                <h1 className="text-5xl font-bold text-white mb-12">Frequently Asked Questions</h1>
+                <h1 className="text-5xl font-bold text-white mb-12 px-5">Frequently Asked Questions</h1>
 
                 <div className="w-full max-w-3xl px-4 md:px-8">
                     {faqs.map((faq, index) => (
