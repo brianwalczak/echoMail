@@ -9,7 +9,7 @@ export default function API() {
                     Whoops! The page you're looking for doesn't exist.
                 </p>
 
-                <Link to="/" className="md:inline-block bg-blue-600 text-white font-semibold py-3 px-6 rounded-xl shadow hover:bg-blue-700 transition">Back to Home</Link>
+                <Link to="/" className="md:inline-block bg-blue-600 text-white font-semibold py-3 px-6 rounded-xl hover:bg-blue-700 transition">Back to Home</Link>
             </div>
         </main>
     );

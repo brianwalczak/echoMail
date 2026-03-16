@@ -29,7 +29,7 @@ const MailViewer = ({ mail, onClose }) => {
 
   return (
     <div className={`mail fixed inset-0 z-50 bg-black/70 flex items-center justify-center text-left mx-5 ${visible ? 'visible' : ''}`}>
-      <div className="bg-white dark:bg-gray-900 text-black dark:text-white rounded-2xl shadow-xl w-full max-w-3xl h-[90vh] flex flex-col overflow-hidden">
+      <div className="bg-white dark:bg-gray-900 text-black dark:text-white rounded-2xl w-full max-w-3xl h-[90vh] flex flex-col overflow-hidden">
         <div className="flex justify-between items-center px-6 py-4 border-b border-gray-300 dark:border-gray-700">
           <div className="flex-1 min-w-0">
             <h2 className="text-xl font-bold truncate">{mail.subject}</h2>

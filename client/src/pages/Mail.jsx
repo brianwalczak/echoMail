@@ -6,7 +6,7 @@ import Dialog from '../components/Dialog.jsx';
 
 export default function Mail() {
     const [loading, setLoading] = useState(false);
-    const [inbox, setInbox] = useState(null);
+    const [inbox, setInbox] = useState([{ id: '22222', subject: 'Confirm your email address', from: 'no-reply@spotify.com', receivedAt: new Date(), body: 'Confirm your email address so you can always access your account...' }]);
     const [expiresAt, setExpiresAt] = useState(null);
 
     const [activeMail, setActiveMail] = useState(null);
@@ -146,7 +146,7 @@ export default function Mail() {
     }, []); // on mount
 
     return (
-        <main className="flex items-center justify-start flex-col text-center px-4 min-h-screen pt-32 border-b border-gray-400/30">
+        <main className="flex items-center justify-start flex-col text-center px-4 min-h-screen pt-32">
             <h1 className="text-5xl md:text-5xl font-bold mb-6 text-white">{inbox ? 'Inbox Dashboard' : 'Create an Inbox'}</h1>
             <p className={`text-lg md:text-xl text-gray-300 ${inbox ? 'mb-4' : 'mb-8'}`}>{inbox ? 'Access your disposable inbox\'s messages below.' : 'Get started by creating a new disposable inbox in seconds.'}</p>
 
@@ -155,35 +155,41 @@ export default function Mail() {
             {activeMail && (<MailViewer mail={activeMail} onClose={() => setActiveMail(null)} />)}
 
             {!inbox ? (
-                <div className="w-full max-w-md mx-auto rounded-lg p-8 shadow border border-gray-400/30 bg-white/20 transition">
+                <div className="w-full max-w-md mx-auto rounded-2xl p-8 bg-white/5 border border-white/10 transition">
                     <div className="flex mb-6">
-                        <button onClick={() => setTab('create')} className={`flex-1 py-2 font-semibold rounded-l-lg text-white ${tab === 'create' ? 'bg-blue-700' : 'bg-white/20'}`}>Create New</button>
-                        <button onClick={() => setTab('existing')} className={`flex-1 py-2 font-semibold rounded-r-lg text-white ${tab === 'existing' ? 'bg-blue-700' : 'bg-white/20'}`}>Use Existing</button>
+                        <button onClick={() => setTab('create')} className={`flex-1 py-2 cursor-pointer font-semibold rounded-l-xl text-white ${tab === 'create' ? 'bg-blue-600' : 'bg-white/5'}`}>Create New</button>
+                        <button onClick={() => setTab('existing')} className={`flex-1 py-2 cursor-pointer font-semibold rounded-r-xl text-white ${tab === 'existing' ? 'bg-blue-600' : 'bg-white/5'}`}>Use Existing</button>
                     </div>
                     {tab === 'create' && (
                         <form onSubmit={e => { e.preventDefault(); createInbox({ toast: true }); }}>
                             <label className="block text-left mb-2 text-white font-semibold">Duration</label>
 
-                            <select value={duration} onChange={e => setDuration(e.target.value)} className="w-full mb-4 p-2 rounded bg-gray-800 text-white" required>
-                                <option value="24h">24 Hours</option>
-                                <option value="48h">48 Hours</option>
-                                <option value="3d">3 Days</option>
-                                <option value="7d">7 Days</option>
-                            </select>
+                            <div className="relative mb-4">
+                                <select value={duration} onChange={e => setDuration(e.target.value)} className="w-full p-3 pr-10 appearance-none bg-white/5 border border-white/10 rounded-xl text-white" required>
+                                    <option value="24h" className="bg-gray-900 text-white">24 Hours</option>
+                                    <option value="48h" className="bg-gray-900 text-white">48 Hours</option>
+                                    <option value="3d" className="bg-gray-900 text-white">3 Days</option>
+                                    <option value="7d" className="bg-gray-900 text-white">7 Days</option>
+                                </select>
 
-                            <button type="submit" className="w-full bg-blue-700 text-white font-semibold py-3 px-6 rounded-lg shadow hover:bg-blue-800 transition" disabled={(loading !== false)}>{(loading !== false) ? loading : "Create Temporary Email"}</button>
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="size-4 text-gray-400 absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none">
+                                    <path strokeLinecap="round" strokeLinejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" />
+                                </svg>
+                            </div>
+
+                            <button type="submit" className="w-full bg-blue-600 cursor-pointer text-white font-semibold py-3 px-6 rounded-xl hover:bg-blue-700 transition" disabled={(loading !== false)}>{(loading !== false) ? loading : "Create Temporary Email"}</button>
                         </form>
                     )}
                     {tab === 'existing' && (
                         <>
                             <form onSubmit={e => { e.preventDefault(); loadExisting(); }}>
                                 <label className="block text-left mb-2 text-white font-semibold">Session ID</label>
-                                <input type="text" value={existingId} onChange={e => setExistingId(e.target.value)} className="w-full mb-4 p-2 rounded bg-gray-800 text-white" placeholder="Enter session identifier" required />
-                                
+                                <input type="text" value={existingId} onChange={e => setExistingId(e.target.value)} className="w-full mb-4 p-3 bg-white/5 border border-white/10 rounded-xl text-white" placeholder="Enter session identifier" required />
+
                                 <label className="block text-left mb-2 text-white font-semibold">Session Token</label>
-                                <input type="text" value={existingToken} onChange={e => setExistingToken(e.target.value)} className="w-full mb-4 p-2 rounded bg-gray-800 text-white" placeholder="Enter session token" required />
-                                
-                                <button type="submit" className="w-full bg-blue-700 text-white font-semibold py-3 px-6 rounded-lg shadow hover:bg-blue-800 transition" disabled={(loading !== false)}>{(loading !== false) ? loading : "Use Existing Inbox"}</button>
+                                <input type="text" value={existingToken} onChange={e => setExistingToken(e.target.value)} className="w-full mb-4 p-3 bg-white/5 border border-white/10 rounded-xl text-white" placeholder="Enter session token" required />
+
+                                <button type="submit" className="w-full bg-blue-600 cursor-pointer text-white font-semibold py-3 px-6 rounded-xl hover:bg-blue-700 transition" disabled={(loading !== false)}>{(loading !== false) ? loading : "Use Existing Inbox"}</button>
                             </form>
 
                             <p className="text-sm mt-3">Learn more about API usage and sessions <a href="/api" className="underline">here</a>.</p>
@@ -193,13 +199,13 @@ export default function Mail() {
             ) : (
                 <>
                     <div className="mb-8">
-                        <div onClick={() => copyToClipboard({ toast: true })} className="text-xl font-bold text-blue-500 mb-2 rounded-md px-3 py-1.5 border border-transparent hover:border-gray-400/30 hover:bg-white/20 hover:text-white transition active:bg-gray-700 active:text-gray-400">{`${getCookie('session_id')}@${window.location.host}`}</div>
-                        <button onClick={() => fetchInbox({ toast: true })} className="md:inline-block bg-blue-700 text-white font-semibold py-3 px-6 rounded-lg shadow hover:bg-blue-800 transition" disabled={(loading !== false)}>{(loading !== false) ? loading : "Refresh Inbox"}</button>
-                        <button onClick={() => setDialog({ id: "destroy", type: "danger", title: "Destroy disposable inbox?", body: "Are you sure you want to destroy your disposable inbox? All received emails will be permanently deleted and cannot be recovered.", cancel: "Cancel", confirm: "Destroy", onClose: (status) => { setDialog(null); if (status === true) destroyInbox({ toast: true }); } })} className="md:inline-block bg-transparent text-red-500 font-semibold py-3 px-6 rounded-lg shadow border border-red-500 hover:bg-red-700 hover:text-white transition ml-3" disabled={(loading !== false)}>Destroy Inbox</button>
+                        <div onClick={() => copyToClipboard({ toast: true })} className="cursor-pointer text-xl font-bold text-blue-500 mb-2 rounded-md px-3 py-1.5 border border-transparent hover:border-gray-400/30 hover:bg-white/20 hover:text-white transition active:bg-gray-700 active:text-gray-400">{`${getCookie('session_id')}@${window.location.host}`}</div>
+                        <button onClick={() => fetchInbox({ toast: true })} className="cursor-pointer md:inline-block bg-blue-600 text-white font-semibold py-3 px-6 rounded-xl hover:bg-blue-700 transition" disabled={(loading !== false)}>{(loading !== false) ? loading : "Refresh Inbox"}</button>
+                        <button onClick={() => setDialog({ id: "destroy", type: "danger", title: "Destroy disposable inbox?", body: "Are you sure you want to destroy your disposable inbox? All received emails will be permanently deleted and cannot be recovered.", cancel: "Cancel", confirm: "Destroy", onClose: (status) => { setDialog(null); if (status === true) destroyInbox({ toast: true }); } })} className="cursor-pointer md:inline-block bg-transparent border border-red-500/50 text-red-500 font-semibold py-3 px-6 rounded-xl hover:bg-red-500/30 transition ml-3" disabled={(loading !== false)}>Destroy Inbox</button>
                     </div>
                     {expiresAt && (<p className="text-sm text-gray-400 mb-4">This inbox will expire on <b>{parseDate(expiresAt)}</b>. You can create a new inbox at any time.</p>)}
 
-                    <div className="rounded-md border border-gray-400/30 bg-white/20 transition p-6 w-full max-w-4xl overflow-y-auto">
+                    <div className="rounded-2xl border border-white/10 bg-white/5 transition p-6 w-full max-w-4xl overflow-y-auto">
                         {inbox.length === 0 ? (
                             <p className="text-gray-300">No emails have been received yet. Your inbox will update automatically.</p>
                         ) : (
@@ -208,7 +214,7 @@ export default function Mail() {
 
                                 <ul>
                                     {inbox.map(mail => (
-                                        <li key={mail.id} onClick={() => openMail(mail.id)} className="text-left rounded-lg transition hover:bg-white/10 hover:shadow-lg hover:text-white cursor-pointer p-4">
+                                        <li key={mail.id} onClick={() => openMail(mail.id)} className="text-left rounded-xl transition hover:bg-white/5 hover:text-white cursor-pointer p-4">
                                             <div className="font-bold text-white">{mail.subject}</div>
                                             <div className="text-gray-400 text-sm">{mail.from} • {parseDate(mail.receivedAt)}</div>
                                             <p className="text-gray-300 mt-2 truncate">{mail.body.length > 150 ? mail.body.slice(0, 150) + '…' : mail.body}</p>
