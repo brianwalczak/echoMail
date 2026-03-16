@@ -98,7 +98,7 @@ export default function Home() {
                 </div>
             </main>
 
-            <div id="features" className="flex flex-col items-center justify-center pt-38 bg-gray-950 scroll-mt-[90px]">
+            <div id="features" className="flex flex-col items-center justify-center pt-38 scroll-mt-[90px]">
                 <h1 className="text-5xl font-bold text-white mb-12 px-5">Features</h1>
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-7xl w-full px-4 md:px-8">
@@ -150,7 +150,7 @@ export default function Home() {
                 </div>
             </div>
 
-            <div id="how-it-works" className="flex flex-col items-center justify-center pt-38 bg-gray-950 scroll-mt-[50px]">
+            <div id="how-it-works" className="flex flex-col items-center justify-center pt-38 scroll-mt-[50px]">
                 <h1 className="text-5xl font-bold text-white mb-16 px-5">How It Works</h1>
 
                 <div className="relative flex flex-col items-center w-full max-w-3xl px-4 md:px-8">
@@ -177,7 +177,7 @@ export default function Home() {
                 </div>
             </div>
 
-            <div id="faq" className="flex flex-col items-center justify-center py-38 bg-gray-950">
+            <div id="faq" className="flex flex-col items-center justify-center py-38">
                 <h1 className="text-5xl font-bold text-white mb-12 px-5">Frequently Asked Questions</h1>
 
                 <div className="w-full max-w-3xl px-4 md:px-8">
