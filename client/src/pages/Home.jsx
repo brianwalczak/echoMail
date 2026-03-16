@@ -71,7 +71,7 @@ export default function Home() {
                 </div>
             </main>
 
-            <div id="features" className="flex flex-col items-center justify-center py-24 bg-gray-950 scroll-mt-[90px]">
+            <div id="features" className="flex flex-col items-center justify-center pt-38 bg-gray-950 scroll-mt-[90px]">
                 <h1 className="text-5xl font-bold text-white mb-12">Features</h1>
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-7xl w-full px-4 md:px-8">
@@ -123,7 +123,7 @@ export default function Home() {
                 </div>
             </div>
 
-            <div id="how-it-works" className="flex flex-col items-center justify-center py-24 bg-gray-950 scroll-mt-[50px]">
+            <div id="how-it-works" className="flex flex-col items-center justify-center pt-38 bg-gray-950 scroll-mt-[50px]">
                 <h1 className="text-5xl font-bold text-white mb-16">How It Works</h1>
 
                 <div className="relative flex flex-col items-center w-full max-w-3xl px-4 md:px-8">
@@ -150,13 +150,13 @@ export default function Home() {
                 </div>
             </div>
 
-            <div id="faq" className="flex flex-col items-center justify-center py-24 bg-gray-950">
+            <div id="faq" className="flex flex-col items-center justify-center py-38 bg-gray-950">
                 <h1 className="text-5xl font-bold text-white mb-12">Frequently Asked Questions</h1>
 
                 <div className="w-full max-w-3xl px-4 md:px-8">
                     {faqs.map((faq, index) => (
                         <div key={index} className="mb-4">
-                            <button className="flex justify-between items-center w-full p-6 bg-white/5 border border-white/10 rounded-2xl hover:bg-white/8 transition text-left" onClick={() => toggleFaq(index)}>
+                            <button className={`flex justify-between items-center w-full cursor-pointer p-6 border rounded-2xl transition text-left ${openFaq === index ? 'bg-blue-600/15 border-blue-500/30' : 'bg-white/5 border-white/10 hover:bg-white/8'}`} onClick={() => toggleFaq(index)}>
                                 <h3 className="text-xl font-semibold text-white">{faq.question}</h3>
 
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="2.5" stroke="currentColor" className={`size-6 text-blue-500 transform transition-transform ${openFaq === index ? 'rotate-180' : ''}`}>
@@ -165,8 +165,8 @@ export default function Home() {
                             </button>
 
                             {openFaq === index && (
-                                <div className="p-6 bg-white/10 border border-white/10 rounded-2xl mt-2">
-                                    <p className="text-base text-gray-300">{faq.answer}</p>
+                                <div className="px-6 py-5 border-x border-b border-blue-500/20 rounded-b-2xl -mt-4 pt-6 bg-gray-900/50">
+                                    <p className="text-base text-gray-400 leading-relaxed mt-2">{faq.answer}</p>
                                 </div>
                             )}
                         </div>
