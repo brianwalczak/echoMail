@@ -6,7 +6,7 @@ import Dialog from '../components/Dialog.jsx';
 
 export default function Mail() {
     const [loading, setLoading] = useState(false);
-    const [inbox, setInbox] = useState([{ id: '22222', subject: 'Confirm your email address', from: 'no-reply@spotify.com', receivedAt: new Date(), body: 'Confirm your email address so you can always access your account...' }]);
+    const [inbox, setInbox] = useState(null);
     const [expiresAt, setExpiresAt] = useState(null);
 
     const [activeMail, setActiveMail] = useState(null);
