@@ -1,7 +1,6 @@
 import { Routes, Route, useLocation } from "react-router-dom";
 import { useEffect, useRef } from "react";
 import ScrollToTop from "./components/ScrollToTop";
-import CustomCursor from "./components/CustomCursor";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
 import Home from "./pages/Home";
@@ -17,9 +16,9 @@ export default function App() {
     useEffect(() => {
         const handleScroll = () => {
             if (window.scrollY > 30) {
-                navbar.current.classList.replace("border-gray-400/0", "border-gray-400/30");
+                navbar.current.classList.replace("border-white/0", "border-white/10");
             } else {
-                navbar.current.classList.replace("border-gray-400/30", "border-gray-400/0");
+                navbar.current.classList.replace("border-white/10", "border-white/0");
             }
         };
         
@@ -42,7 +41,6 @@ export default function App() {
 
     return (
         <>
-            <CustomCursor />
             <ScrollToTop />
             <Header ref={navbar} />
 
