@@ -1,6 +1,6 @@
 export default function API() {
     return (
-        <main className="flex items-center justify-start flex-col text-center px-4 min-h-screen pt-32 border-b border-gray-400/30">
+        <main className="flex items-center justify-start flex-col text-center px-4 min-h-screen pt-40">
             <div className="animated animatedFadeInUp fadeInUp max-w-3xl w-full">
                 <h1 className="text-5xl md:text-6xl font-bold mb-6 text-white">API Docs</h1>
                 <p className="text-lg md:text-xl text-gray-300 mb-8">Integrate disposable email addresses for your application in seconds.</p>
@@ -9,7 +9,7 @@ export default function API() {
                     <h2 className="text-2xl font-semibold text-white mb-3">Creating a Session</h2>
                     <p className="text-gray-300 mb-3">Creates a new session. Returns a session identifier and session token (required for authentication).</p>
 
-                    <pre className="bg-gray-900 p-4 rounded-lg text-sm text-gray-200 overflow-x-auto mb-3">
+                    <pre className="bg-white/5 border border-white/10 rounded-xl p-4 text-sm text-gray-300 overflow-x-auto mb-3">
 {`POST /api/session
 {
     "method": "create",
@@ -18,10 +18,10 @@ export default function API() {
                     </pre>
 
                     <p className="text-gray-300 mb-1">Response (<b>201 Created</b>):</p>
-                    <pre className="bg-gray-900 p-4 rounded-lg text-sm text-gray-200 overflow-x-auto mb-3">
+                    <pre className="bg-white/5 border border-white/10 rounded-xl p-4 text-sm text-gray-300 overflow-x-auto mb-3">
 {`{
     "success": true,
-    "token": "1HvdCqHkCVj6u4H_frRlzUeXve2mjvjfKq9aTBSMdMu6DqKkzyeFRGEWB06snN3baqjqMk7bkOfDi82Q",
+    "token": "1HvdCqHkCVj6u4H_frRlzUeXve2mjvjfKq9aTBSMdMu6DqKkzyeFRGEWB06snN3baqjqMk7bkOfDi82",
     "data": {
         "id": "kgrmibo",
         "createdAt": "2025-09-07T00:38:02.910Z",
@@ -36,7 +36,7 @@ export default function API() {
                     <h2 className="text-2xl font-semibold text-white mb-3">Get Session</h2>
                     <p className="text-gray-300 mb-3">Retrieves session details, including messages, using the session identifier and token.</p>
 
-                    <pre className="bg-gray-900 p-4 rounded-lg text-sm text-gray-200 overflow-x-auto mb-3">
+                    <pre className="bg-white/5 border border-white/10 rounded-xl p-4 text-sm text-gray-300 overflow-x-auto mb-3">
 {`POST /api/session
 {
     "method": "get",
@@ -46,7 +46,7 @@ export default function API() {
                     </pre>
 
                     <p className="text-gray-300 mb-1">Response (<b>200 OK</b>):</p>
-                    <pre className="bg-gray-900 p-4 rounded-lg text-sm text-gray-200 overflow-x-auto mb-3">
+                    <pre className="bg-white/5 border border-white/10 rounded-xl p-4 text-sm text-gray-300 overflow-x-auto mb-3">
 {`{
     "success": true,
     "data": {
@@ -72,7 +72,7 @@ export default function API() {
                     <h2 className="text-2xl font-semibold text-white mb-3">Revoke Session</h2>
                     <p className="text-gray-300 mb-3">Revokes a session using the session identifier and token (permanent deletion).</p>
 
-                    <pre className="bg-gray-900 p-4 rounded-lg text-sm text-gray-200 overflow-x-auto mb-3">
+                    <pre className="bg-white/5 border border-white/10 rounded-xl p-4 text-sm text-gray-300 overflow-x-auto mb-3">
 {`POST /api/session
 {
     "method": "revoke",
@@ -82,7 +82,7 @@ export default function API() {
                     </pre>
 
                     <p className="text-gray-300 mb-1">Response (<b>200 OK</b>):</p>
-                    <pre className="bg-gray-900 p-4 rounded-lg text-sm text-gray-200 overflow-x-auto mb-3">
+                    <pre className="bg-white/5 border border-white/10 rounded-xl p-4 text-sm text-gray-300 overflow-x-auto mb-3">
 {`{
     "success": true,
     "data": {
