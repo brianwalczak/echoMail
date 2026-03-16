@@ -33,14 +33,41 @@ export default function Home() {
 
     return (
         <>
-            <main className="flex items-center justify-start flex-col text-center px-4 min-h-screen glow glow-blue pt-70">
+            <main className="flex items-center justify-start flex-col text-center px-4 min-h-screen glow glow-blue pt-50">
                 <div className="animated animatedFadeInUp fadeInUp">
                     <h1 className="text-4xl md:text-6xl font-bold mb-6 text-white">Private mail for <span className="text-blue-500">everyone</span>.</h1>
                     <p className="text-lg md:text-xl text-gray-400 mb-8">Create disposable, secure email addresses in seconds. No signup required.</p>
 
-                    <div className="flex items-center justify-center gap-3 mb-16">
+                    <div className="flex items-center justify-center gap-3 mb-12">
                         <Link to="/mail" className="bg-blue-600 text-white font-semibold py-3 px-6 rounded-xl hover:bg-blue-700 transition">Get Started</Link>
                         <Link to="/api" className="border border-white/20 text-gray-300 font-semibold py-3 px-6 rounded-xl hover:bg-white/10 transition">View Docs</Link>
+                    </div>
+
+                    <div className="w-full max-w-2xl mx-auto bg-white/5 border border-white/10 rounded-2xl overflow-hidden">
+                        <div className="flex items-center gap-2 px-5 py-3 border-b border-white/10">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-4 text-gray-500">
+                                <path strokeLinecap="round" strokeLinejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 0 1-2.25 2.25h-15a2.25 2.25 0 0 1-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0 0 19.5 4.5h-15a2.25 2.25 0 0 0-2.25 2.25m19.5 0v.243a2.25 2.25 0 0 1-1.07 1.916l-7.5 4.615a2.25 2.25 0 0 1-2.36 0L3.32 8.91a2.25 2.25 0 0 1-1.07-1.916V6.75" />
+                            </svg>
+
+                            <span className="text-sm font-mono text-gray-500">kgrmibo@{window.location.host}</span>
+                        </div>
+                        <div className="divide-y divide-white/5 text-left">
+                            <div className="px-5 py-3 hover:bg-white/5 transition">
+                                <div className="font-semibold text-white text-sm">Confirm your email address</div>
+                                <div className="text-xs text-gray-500">no-reply@spotify.com • 2 min ago</div>
+                                <p className="text-sm text-gray-400 mt-1 truncate">Confirm your email address so you can always access your account...</p>
+                            </div>
+                            <div className="px-5 py-3 hover:bg-white/5 transition">
+                                <div className="font-semibold text-white text-sm">Extra 10% off just for YOU - welcome to AE!</div>
+                                <div className="text-xs text-gray-500">ae@e.ae.com • 15 min ago</div>
+                                <p className="text-sm text-gray-400 mt-1 truncate">Thanks for signing up for emails! Take an extra 10% off your next AE purchase...</p>
+                            </div>
+                            <div className="px-5 py-3 hover:bg-white/5 transition">
+                                <div className="font-semibold text-white text-sm">Welcome to your free trial of Target Circle 360 🎉</div>
+                                <div className="text-xs text-gray-500">orders@oe.target.com • 1 hr ago</div>
+                                <p className="text-sm text-gray-400 mt-1 truncate">Welcome to your 14-day free trial of Target Circle 360. The fastest delivery to...</p>
+                            </div>
+                        </div>
                     </div>
 
                     <div className="flex items-center justify-center gap-8 mt-10 text-sm text-gray-500">
