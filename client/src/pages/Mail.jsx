@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import MailViewer from '../components/MailViewer.jsx';
 import Toast from '../components/Toast.jsx';
 import Dialog from '../components/Dialog.jsx';
+import Dropdown from '../components/Dropdown.jsx';
 
 export default function Mail() {
     const [loading, setLoading] = useState(false);
@@ -164,18 +165,12 @@ export default function Mail() {
                         <form onSubmit={e => { e.preventDefault(); createInbox({ toast: true }); }}>
                             <label className="block text-left mb-2 text-white font-semibold">Duration</label>
 
-                            <div className="relative mb-4">
-                                <select value={duration} onChange={e => setDuration(e.target.value)} className="w-full p-3 pr-10 appearance-none bg-white/5 border border-white/10 rounded-xl text-white" required>
-                                    <option value="24h" className="bg-gray-900 text-white">24 Hours</option>
-                                    <option value="48h" className="bg-gray-900 text-white">48 Hours</option>
-                                    <option value="3d" className="bg-gray-900 text-white">3 Days</option>
-                                    <option value="7d" className="bg-gray-900 text-white">7 Days</option>
-                                </select>
-
-                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="size-4 text-gray-400 absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none">
-                                    <path strokeLinecap="round" strokeLinejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" />
-                                </svg>
-                            </div>
+                            <Dropdown value={duration} onChange={setDuration} options={[
+                                { value: '24h', label: '24 Hours' },
+                                { value: '48h', label: '48 Hours' },
+                                { value: '3d', label: '3 Days' },
+                                { value: '7d', label: '7 Days' },
+                            ]} />
 
                             <button type="submit" className="w-full bg-blue-600 cursor-pointer text-white font-semibold py-3 px-6 rounded-xl hover:bg-blue-700 transition" disabled={(loading !== false)}>{(loading !== false) ? loading : "Create Temporary Email"}</button>
                         </form>
